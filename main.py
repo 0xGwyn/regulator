@@ -181,11 +181,13 @@ def is_good_rule(regex: str, nkeys: int, threshold: int, max_ratio: float) -> bo
   return nwords < threshold or (nwords/nkeys) < max_ratio
 
 def sort_and_unique(file_name: str):
+  lines = set()
   with open(file_name, "r") as file:
-    data = file.readlines()
-    data = sorted(set(data))
+    for line in file:
+      lines.add(line)
+    lines = sorted(lines)
   with open(file_name, "w") as file:
-    file.writelines(data)
+    file.writelines(lines)
 
 def main():
   global DNS_CHARS, MEMO
